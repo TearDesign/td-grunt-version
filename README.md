@@ -1,2 +1,2 @@
-# td-grunt-version-pattern-replace
+# td-grunt-version
 Version grunt static hosted files

@@ -1,7 +1,7 @@
 {
   "name": "td-grunt-version",
   "description": "Version static hosted files",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "homepage": "https://github.com/TearDesign/td-grunt-version",
   "author": {
     "name": "Andrea Epifani",

@@ -70,3 +70,4 @@ The template files in which you'd like the plugin to replace your files with the
 ## License
 
 This plugin is distributed under the MIT license.
+

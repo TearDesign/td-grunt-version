@@ -27,8 +27,6 @@ module.exports = function (grunt) {
 
             var find = new RegExp("([href|src][=])([\\\"|\\\'])(.*\\\." + pattern + ")(\\\d+)(" + types + ")([\\\"|\\\'])", "g");
 
-            console.log(find);
-
             var pageData = grunt.file.read(f);
 
             var fileNames = [];
@@ -36,7 +34,6 @@ module.exports = function (grunt) {
             var fileNamesVersion = [];
 
             var match = find.exec(pageData);
-            console.log(pageData);
             while (match != null) {
                 fileNames.push(match[3] + match[4] + match[5]);
                 fileNamesNoVersion.push(match[3].replace("." + pattern, '') + match[5]);

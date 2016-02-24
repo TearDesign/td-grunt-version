@@ -1,5 +1,5 @@
 /*
- * grunt-version-pattern-replace
+ * td-grunt-version
  * https://github.com/teardesign/grunt-assets-version-replace
  *
  * Licensed under the MIT license.
@@ -14,17 +14,6 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     grunt.initConfig({
-
-        clean: {
-            dist: {
-                files: [{
-                    dot: true,
-                    src: [
-                        'test/*'
-                    ]
-                }]
-            }
-        },
 
         assets_versioning: {
             version: {

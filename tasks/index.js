@@ -1,5 +1,5 @@
 /*
- * grunt-version-pattern-replace
+ * td-grunt-version
  * https://github.com/teardesign/grunt-assets-version-replace
  *
  * Licensed under the MIT license.
@@ -9,10 +9,9 @@ module.exports = function (grunt) {
     'use strict';
 
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     var version = Number(new Date());
-
-    console.log("New version:", version);
 
     grunt.registerMultiTask('assets_versioning', 'Version your assets', function () {
 
@@ -28,6 +27,8 @@ module.exports = function (grunt) {
 
             var find = new RegExp("([href|src][=])([\\\"|\\\'])(.*\\\." + pattern + ")(\\\d+)(" + types + ")([\\\"|\\\'])", "g");
 
+            console.log(find);
+
             var pageData = grunt.file.read(f);
 
             var fileNames = [];
@@ -35,9 +36,10 @@ module.exports = function (grunt) {
             var fileNamesVersion = [];
 
             var match = find.exec(pageData);
+            console.log(pageData);
             while (match != null) {
                 fileNames.push(match[3] + match[4] + match[5]);
-                fileNamesNoVersion.push(self.data.base_dir + match[3].replace("." + pattern, '') + match[5]);
+                fileNamesNoVersion.push(match[3].replace("." + pattern, '') + match[5]);
                 fileNamesVersion.push(match[3] + version + match[5]);
                 match = find.exec(pageData);
             }
@@ -59,14 +61,25 @@ module.exports = function (grunt) {
                 filesToCopy['c' + String(i)] = {
                     files: [{
                         cwd: '',
-                        src: [f],
-                        dest: self.data.base_dir + 'dist/' + fileNamesVersion[i],
+                        src: grunt.file.expand(self.data.base_dir + "/**/" + fileNamesNoVersion[i].split('/').pop()),
+                        dest: self.data.base_dir + 'dist/' + fileNamesVersion[i].split('/').pop(),
                     }]
                 };
             });
 
+            grunt.config('clean', {
+                all: {
+                    files: [{
+                        dot: true,
+                        src: [
+                            self.data.base_dir + 'dist/*'
+                        ]
+                    }]
+                }
+            });
             grunt.config('copy', filesToCopy);
-            grunt.task.run('copy');
+
+            grunt.task.run(['clean', 'copy']);
 
         });
 

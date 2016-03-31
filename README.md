@@ -64,8 +64,8 @@ A pattern you will use in your template files and that will be used to identify 
 `base_dir`
 The directory in which your source files are *and* a `dist` folder will be created with the versioned files
 
-`search_in`
-The template files in which you'd like the plugin to replace your files with the versioned file names
+`replace_in`
+Couples of files in the format { 'dest': 'template' } that you wish to replace versioning strings in.
 
 ## License
 

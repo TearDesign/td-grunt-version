@@ -19,7 +19,7 @@ module.exports = function (grunt) {
 
         var pattern = this.data.pattern ? this.data.pattern : 'versioning_';
 
-        this.data.search_in.forEach(function (f) {
+        for (var k in this.data.replace_in) {
 
             var types = self.data.file_types;
             for (var t in types) types[t] = "." + types[t];
@@ -27,7 +27,7 @@ module.exports = function (grunt) {
 
             var find = new RegExp("([href|src][=])([\\\"|\\\'])(.*\\\." + pattern + ")(\\\d+)(" + types + ")([\\\"|\\\'])", "g");
 
-            var pageData = grunt.file.read(f);
+            var pageData = grunt.file.read(this.data.replace_in[k]);
 
             var fileNames = [];
             var fileNamesNoVersion = [];
@@ -46,7 +46,7 @@ module.exports = function (grunt) {
                 pageData = pageData.replace(fn, fileNamesVersion[i]);
             });
 
-            if (grunt.file.write(f, pageData)) {
+            if (grunt.file.write(k, pageData)) {
                 grunt.log.success('versions updated, now copying files :)');
             } else {
                 grunt.log.error('versions updated failed...');
@@ -78,7 +78,7 @@ module.exports = function (grunt) {
 
             grunt.task.run(['clean', 'copy']);
 
-        });
+        }
 
     });
 

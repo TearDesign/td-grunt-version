@@ -19,7 +19,8 @@ module.exports = function(grunt) {
             version: {
                 file_types: ['css', 'js'],
                 pattern: 'versioning_',
-                base_dir: 'test/',
+                version: 'test',
+		base_dir: 'test/',
                 search_in: [
                     'test/index.html'
                 ]

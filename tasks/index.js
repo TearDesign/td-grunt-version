@@ -11,13 +11,15 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
-    var version = Number(new Date());
 
     grunt.registerMultiTask('assets_versioning', 'Version your assets', function () {
 
         var self = this;
 
         var pattern = this.data.pattern ? this.data.pattern : 'versioning_';
+    	var version = this.data.version ? this.data.version : Number(new Date());
+
+	grunt.log.success('Version ' + version);
 
         for (var k in this.data.replace_in) {
 
